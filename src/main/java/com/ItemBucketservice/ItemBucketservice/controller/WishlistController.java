@@ -1,6 +1,7 @@
 package com.ItemBucketservice.ItemBucketservice.controller;
 
 import com.ItemBucketservice.ItemBucketservice.model.Product;
+import com.ItemBucketservice.ItemBucketservice.model.User;
 import com.ItemBucketservice.ItemBucketservice.model.Wishlist;
 import com.ItemBucketservice.ItemBucketservice.service.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,37 +27,33 @@ public class WishlistController {
     @Autowired
     private WishlistService wishlistService;
 
-    @PostMapping
-    public ResponseEntity<Wishlist> createWishlist(@RequestBody Wishlist wishlist) {
-        Wishlist createdWishlist = wishlistService.createWishlist(wishlist);
+    @PostMapping("/{userId}/wishlists")
+    public ResponseEntity<Wishlist> createWishlist(@PathVariable String userId, @RequestBody Wishlist wishlist) {
+        Wishlist createdWishlist = wishlistService.createWishlist(userId, wishlist);
         return ResponseEntity.ok(createdWishlist);
     }
 
-    @GetMapping("/{wishlistId}")
-    public ResponseEntity<Wishlist> getWishlistById(@PathVariable String wishlistId) {
-        Wishlist wishlist = wishlistService.getWishlistById(wishlistId);
-        if (wishlist != null) {
-            return ResponseEntity.ok(wishlist);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/{userId}/wishlists")
+    public ResponseEntity<List<Wishlist>> getWishlistsByUserId(@PathVariable String userId) {
+        List<Wishlist> wishlists = wishlistService.getWishlistsByUserId(userId);
+        return ResponseEntity.ok(wishlists);
     }
 
-    @PostMapping("/{wishlistId}/addProduct/{productId}")
-    public ResponseEntity<Void> addToWishlist(@PathVariable String wishlistId, @PathVariable String productId) {
-        wishlistService.addToWishlist(wishlistId, productId);
+    @PostMapping("/{userId}/{wishlistId}/addProduct/{productId}")
+    public ResponseEntity<Void> addToWishlist( @PathVariable String userId ,@PathVariable String wishlistId, @PathVariable String productId) {
+        wishlistService.addToWishlist(userId ,wishlistId, productId);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{wishlistId}/removeProduct/{productId}")
+    @PostMapping("/{userId}/{wishlistId}/removeProduct/{productId}")
     public ResponseEntity<Void> removeFromWishlist(@PathVariable String wishlistId, @PathVariable String productId) {
         wishlistService.removeFromWishlist(wishlistId, productId);
         return ResponseEntity.ok().build();
     }
 
-   /* @GetMapping("/{wishlistId}/products")
+    @GetMapping("/{userId}/{wishlistId}/products")
     public ResponseEntity<List<Product>> getProductsInWishlist(@PathVariable String wishlistId) {
         List<Product> products = wishlistService.getProductsInWishlist(wishlistId);
         return ResponseEntity.ok(products);
-    }*/
+    }
 }

@@ -1,19 +1,18 @@
 package com.ItemBucketservice.ItemBucketservice.repository;
 
-import com.ItemBucketservice.ItemBucketservice.model.Product;
 import com.ItemBucketservice.ItemBucketservice.model.User;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import org.socialsignin.spring.data.dynamodb.repository.DynamoDBCrudRepository;
 import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
-@EnableScan
 @Repository
-public interface ProductRepository extends CrudRepository<Product, String> {
-/*
+@EnableScan
+public interface UserRepository extends DynamoDBCrudRepository {
+  /*  @Autowired
+    private DynamoDBMapper dynamoDBMapper;
+
     public User save(User person){
         dynamoDBMapper.save(person);
         return person;
@@ -43,6 +42,3 @@ public interface ProductRepository extends CrudRepository<Product, String> {
         return "Person deleted successfully:: "+id;
     }*/
 }
-
-
-

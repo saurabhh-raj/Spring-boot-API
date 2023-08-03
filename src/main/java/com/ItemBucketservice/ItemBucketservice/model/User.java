@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class User {
 
     @DynamoDBAttribute
-    private String UserId;
+    private String userId;
 
     @DynamoDBAttribute
     private String emailId;

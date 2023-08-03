@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-
 @DynamoDBDocument
 public class Product {
     @DynamoDBAttribute

@@ -10,4 +10,5 @@ import java.util.Optional;
 @EnableScan
 @Repository
 public interface WishlistRepository extends DynamoDBCrudRepository<Wishlist ,String> {
+    Optional<Object> findById(String userId, String wishlistId);
 }

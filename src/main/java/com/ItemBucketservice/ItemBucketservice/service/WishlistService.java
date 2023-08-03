@@ -1,10 +1,14 @@
 package com.ItemBucketservice.ItemBucketservice.service;
 
+import com.ItemBucketservice.ItemBucketservice.model.Product;
 import com.ItemBucketservice.ItemBucketservice.model.Wishlist;
 import com.ItemBucketservice.ItemBucketservice.repository.ProductRepository;
 import com.ItemBucketservice.ItemBucketservice.repository.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class WishlistService {
@@ -16,16 +20,18 @@ public class WishlistService {
 
 
 
-    public Wishlist createWishlist(Wishlist wishlist) {
-        return wishlistRepository.save(wishlist);
+    public Wishlist createWishlist(String userId, Wishlist wishlist) {
+        return wishlistRepository.save(userId);
     }
 
-    public Wishlist getWishlistById(String wishlistId) {
-        return wishlistRepository.findById(wishlistId).orElse(null);
+  /*  public Wishlist getWishlistById(String userId) {
+        return wishlistRepository.findById(userId).orElse(null);
+    }*/
+    public List<Wishlist> getWishlistsByUserId(String userId) {
+        return wishlistRepository.findById(userId);
     }
-
-    public void addToWishlist(String wishlistId, String productId) {
-        Wishlist wishlist = wishlistRepository.findById(wishlistId).orElse(null);
+    public void addToWishlist(String userId , String wishlistId, String productId) {
+        Wishlist wishlist = (Wishlist) wishlistRepository.findById(userId , wishlistId).orElse(null);
         if (wishlist != null) {
             if (!wishlist.getProductIds().contains(productId)) {
                 wishlist.getProductIds().add(productId);
@@ -42,7 +48,7 @@ public class WishlistService {
         }
     }
 
-  /*  public List<Product> getProductsInWishlist(String wishlistId) {
+    public List<Product> getProductsInWishlist(String wishlistId) {
         Wishlist wishlist = wishlistRepository.findById(wishlistId).orElse(null);
         if (wishlist != null) {
             List<String> productIds = wishlist.getProductIds();
@@ -51,5 +57,5 @@ public class WishlistService {
         } else {
             return new ArrayList<>();
         }
-    }*/
+    }
 }

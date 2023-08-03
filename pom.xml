@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-dynamodb</artifactId>
-			<version>1.11.64</version>
+			<version>1.12.85</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.derjust</groupId>
@@ -63,11 +63,6 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.20</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xbean</groupId>
-			<artifactId>xbean-reflect</artifactId>
-			<version>3.4</version>
 		</dependency>
 	</dependencies>
 
